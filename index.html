@@ -14,43 +14,22 @@
         img {
             margin: 20px auto;
         }
-       #yes-button {
+        #yes-button, #no-button {
             margin: 10px;
             transition: font-size 0.2s;
             padding: 10px 20px;
             font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #yes-button {
             background-color: #34C759;
             color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
         }
         #no-button {
-            margin: 10px;
-            transition: font-size 0.2s;
-            padding: 10px 20px;
-            font-size: 16px;
             background-color: #FF3737;
             color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .confetti {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            background-color: #FF69B4;
-            border-radius: 50%;
-            animation: confetti 2s infinite;
-        }
-        @keyframes confetti {
-            0% {
-                transform: translateY(0);
-            }
-            100% {
-                transform: translateY(-100vh);
-            }
         }
         .popup {
             position: fixed;
@@ -62,20 +41,22 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         }
-        .sad-emoji {
-            position: fixed;
-            top: 20%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 50px;
-        }
     </style>
 </head>
 <body>
-    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmVxcHU4NTlob2JoM2J2MXg2cTc3bWZvd2JzdXkyMnNvZzZyYzZjdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/25688FI5AUUVf04upZ/giphy.gif" alt = "lazy corgi">
+
+    <!-- Hidden SoundCloud Player for Laufey - Valentine -->
+    <iframe 
+        width="0" height="0" 
+        style="position: absolute; visibility: hidden;" 
+        scrolling="no" frameborder="no" allow="autoplay" 
+        src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/laufeylin/valentine-1&auto_play=true">
+    </iframe>
+
+    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdmVxcHU4NTlob2JoM2J2MXg2cTc3bWZvd2JzdXkyMnNvZzZyYzZjdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/25688FI5AUUVf04upZ/giphy.gif" alt="lazy corgi">
     <h1>Will you be my Valentine, Shem my baby?</h1>
-    <button id="yes-button" style="font-size: 16px;">Yes</button>
-    <button id="no-button" style="font-size: 16px;">No</button>
+    <button id="yes-button">Yes</button>
+    <button id="no-button">No</button>
     <div id="response"></div>
 
     <script>
@@ -89,19 +70,7 @@
             popup.className = 'popup';
             popup.innerHTML = 'YEHEEEEEEEEEY LES GOOO THANK YOU MY HUNEY BABY BABYYYY';
             document.body.appendChild(popup);
-            setTimeout(() => {
-                popup.remove();
-            }, 3000);
-            for (let i = 0; i < 100; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                confetti.style.top = `${Math.random() * 100}%`;
-                confetti.style.left = `${Math.random() * 100}%`;
-                document.body.appendChild(confetti);
-                setTimeout(() => {
-                    confetti.remove();
-                }, 2000);
-            }
+            setTimeout(() => { popup.remove(); }, 3000);
         });
 
         noButton.addEventListener('click', () => {
@@ -109,30 +78,14 @@
             noButton.style.fontSize = `${16 - noButtonClicks * 2}px`;
             yesButton.style.fontSize = `${16 + noButtonClicks * 2}px`;
             responseDiv.innerHTML = `u missed the yes button ${noButtonClicks} times!`;
+
             const popup = document.createElement('div');
             popup.className = 'popup';
             popup.innerHTML = 'haluhhh 🥺🥺';
             document.body.appendChild(popup);
-            setTimeout(() => {
-                popup.remove();
-            }, 3000);
-        const sadEmoji = document.createElement('div');
-        sadEmoji.className = 'sad-emoji';
-        sadEmoji.innerHTML = '😔';
-        document.body.appendChild(sadEmoji);
-        setTimeout(() => {
-            sadEmoji.remove();
-        }, 3000);
-        moveNoButton();
-    });
+            setTimeout(() => { popup.remove(); }, 3000);
+        });
+    </script>
 
-    function moveNoButton() {
-        noButton.style.position = 'absolute';
-        const maxX = window.innerWidth - noButton.offsetWidth;
-        const maxY = window.innerHeight - noButton.offsetHeight;
-        const newX = Math.floor(Math.random() * maxX);
-        const newY = Math.floor(Math.random() * maxY);
-        noButton.style.top = `${newY}px`;
-        noButton.style.left = `${newX}px`;
-    }
-</script>
+</body>
+</html>
